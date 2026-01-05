@@ -5,36 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ProPlan | Business Strategy Builder</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- jsPDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <!-- Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <style>
       body {
         font-family: "Inter", sans-serif;
-        background: radial-gradient(
-            1200px circle at top right,
-            #eef2ff,
-            transparent
-          ),
+        background: radial-gradient(1200px circle at top right, #eef2ff, transparent),
           linear-gradient(180deg, #f8fafc, #e2e8f0);
         min-height: 100vh;
       }
 
-      .step-content {
-        display: none;
-      }
-      .step-content.active {
-        display: block;
-      }
+      .step-content { display: none; }
+      .step-content.active { display: block; }
 
       .glass {
         background: rgba(255, 255, 255, 0.92);
@@ -67,62 +53,41 @@
         margin-bottom: 0.4rem;
         display: block;
       }
+
+      .dot-active { background-color: #6366f1 !important; width: 1.5rem !important; }
     </style>
   </head>
 
   <body class="py-12">
     <div class="max-w-5xl mx-auto px-6">
-      <!-- HEADER -->
       <header class="flex justify-between items-center mb-12">
         <div>
           <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">
             Pro<span class="text-indigo-600">Plan</span>
           </h1>
-          <p class="text-slate-500 mt-1">
-            Enterprise-grade business planning, simplified.
-          </p>
+          <p class="text-slate-500 mt-1">Enterprise-grade business planning, simplified.</p>
         </div>
 
         <div class="text-right">
-          <div
-            id="step-counter"
-            class="inline-flex items-center px-4 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold"
-          >
+          <div id="step-counter" class="inline-flex items-center px-4 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold">
             Step 1 of 6
           </div>
           <div id="step-dots" class="flex gap-1 mt-2 justify-end"></div>
         </div>
       </header>
 
-      <!-- FORM -->
-      <form
-        id="planForm"
-        class="glass rounded-3xl shadow-2xl border border-slate-200 overflow-hidden"
-      >
-        <!-- PROGRESS -->
+      <form id="planForm" class="glass rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
         <div class="h-2 bg-slate-100">
-          <div
-            id="progress-bar"
-            class="h-full bg-indigo-600 transition-all duration-500"
-            style="width: 16.6%"
-          ></div>
+          <div id="progress-bar" class="h-full bg-indigo-600 transition-all duration-500" style="width: 16.6%"></div>
         </div>
 
         <div class="p-10">
-          <!-- STEP 1 -->
           <div class="step-content active" data-step="1">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6">
-              Executive Identity
-            </h2>
-
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Executive Identity</h2>
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label>Business Name</label>
-                <input
-                  name="bizName"
-                  class="input"
-                  placeholder="e.g. Nexus Technologies"
-                />
+                <input name="bizName" class="input" placeholder="e.g. Nexus Technologies" />
               </div>
               <div>
                 <label>Business Type</label>
@@ -135,48 +100,32 @@
                 </select>
               </div>
             </div>
-
             <label>Mission Statement</label>
-            <textarea name="mission" class="input" rows="3"></textarea>
-
+            <textarea name="mission" class="input" rows="3" placeholder="What is your company's purpose?"></textarea>
             <label>Strategic Goals</label>
-            <textarea name="goals" class="input" rows="3"></textarea>
+            <textarea name="goals" class="input" rows="3" placeholder="List 3 main objectives..."></textarea>
           </div>
 
-          <!-- STEP 2 -->
           <div class="step-content" data-step="2">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6">
-              Product / Service
-            </h2>
-
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Product / Service</h2>
             <label>Description</label>
             <textarea name="prodDesc" class="input" rows="3"></textarea>
-
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label>How It Works</label>
-                <textarea
-                  name="prodMechanics"
-                  class="input"
-                  rows="3"
-                ></textarea>
+                <textarea name="prodMechanics" class="input" rows="3"></textarea>
               </div>
               <div>
                 <label>Customer Need</label>
                 <textarea name="prodNeed" class="input" rows="3"></textarea>
               </div>
             </div>
-
             <label>Unique Value Proposition</label>
-            <input name="usp" class="input" />
+            <input name="usp" class="input" placeholder="What makes you different?" />
           </div>
 
-          <!-- STEP 3 -->
           <div class="step-content" data-step="3">
-            <h2 class="text-2xl font-bold text-slate-800 mb-6">
-              Marketing & Sales
-            </h2>
-
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Marketing & Sales</h2>
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label>Pricing Strategy</label>
@@ -187,89 +136,61 @@
                 <input name="salesMethod" class="input" />
               </div>
             </div>
-
             <label>Promotion Strategy</label>
             <textarea name="promotion" class="input" rows="3"></textarea>
-
             <label>Customer Retention</label>
             <textarea name="retention" class="input" rows="3"></textarea>
           </div>
 
-          <!-- STEP 4 -->
           <div class="step-content" data-step="4">
             <h2 class="text-2xl font-bold text-slate-800 mb-6">Operations</h2>
-
             <label>Tools & Infrastructure</label>
             <textarea name="tools" class="input" rows="3"></textarea>
-
             <label>Suppliers & Partners</label>
             <textarea name="suppliers" class="input" rows="3"></textarea>
-
             <label>Daily Operations</label>
             <textarea name="dailyOps" class="input" rows="3"></textarea>
           </div>
 
-          <!-- STEP 5 -->
           <div class="step-content" data-step="5">
             <h2 class="text-2xl font-bold text-slate-800 mb-6">Management</h2>
-
             <label>Leadership Team</label>
             <textarea name="team" class="input" rows="3"></textarea>
-
             <label>Core Competencies</label>
             <textarea name="skills" class="input" rows="3"></textarea>
-
             <label>Organizational Structure</label>
-            <input name="orgChart" class="input" />
+            <input name="orgChart" class="input" placeholder="e.g. Flat, Hierarchical..." />
           </div>
 
-          <!-- STEP 6 -->
           <div class="step-content" data-step="6">
             <h2 class="text-2xl font-bold text-slate-800 mb-6">Financials</h2>
-
             <div class="grid md:grid-cols-3 gap-6">
               <div>
                 <label>Startup Cost</label>
-                <input name="costStartup" class="input" />
+                <input name="costStartup" class="input" placeholder="$0.00" />
               </div>
               <div>
                 <label>Monthly Expenses</label>
-                <input name="costMonthly" class="input" />
+                <input name="costMonthly" class="input" placeholder="$0.00" />
               </div>
               <div>
                 <label>Revenue Target</label>
-                <input name="revenue" class="input" />
+                <input name="revenue" class="input" placeholder="$0.00" />
               </div>
             </div>
-
             <label>Profit & Break-Even Analysis</label>
             <textarea name="profitAnalysis" class="input" rows="4"></textarea>
           </div>
 
-          <!-- NAV -->
           <div class="mt-10 flex justify-between items-center border-t pt-8">
-            <button
-              id="prevBtn"
-              type="button"
-              class="text-slate-500 font-semibold hover:text-slate-800"
-            >
+            <button id="prevBtn" type="button" class="text-slate-500 font-semibold hover:text-slate-800 transition-colors">
               ← Back
             </button>
-
             <div class="flex gap-4">
-              <button
-                id="nextBtn"
-                type="button"
-                class="px-8 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800"
-              >
+              <button id="nextBtn" type="button" class="px-8 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all">
                 Next Step
               </button>
-
-              <button
-                id="submitBtn"
-                type="button"
-                class="hidden px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700"
-              >
+              <button id="submitBtn" type="button" class="hidden px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
                 Generate PDF
               </button>
             </div>
@@ -282,57 +203,91 @@
       let currentStep = 1;
       const totalSteps = 6;
 
-      const dots = document.getElementById('step-dots');
+      // Selectors
+      const planForm = document.getElementById('planForm');
+      const progressBar = document.getElementById('progress-bar');
+      const stepCounter = document.getElementById('step-counter');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const dotsContainer = document.getElementById('step-dots');
+
+      // Initialize Dots
       for (let i = 1; i <= totalSteps; i++) {
-          const dot = document.createElement('div');
-          dot.className = "h-1.5 w-5 rounded-full bg-slate-300";
-          dots.appendChild(dot);
+        const dot = document.createElement('div');
+        dot.className = "h-1.5 w-5 rounded-full bg-slate-300 transition-all duration-300";
+        dot.id = `dot-${i}`;
+        dotsContainer.appendChild(dot);
       }
 
       function updateUI() {
-          document.querySelectorAll('.step-content').forEach(el =>
-              el.classList.toggle('active', +el.dataset.step === currentStep)
-          );
+        // Show/Hide Steps
+        document.querySelectorAll('.step-content').forEach(el =>
+          el.classList.toggle('active', parseInt(el.dataset.step) === currentStep)
+        );
 
-          prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
-          nextBtn.classList.toggle('hidden', currentStep === totalSteps);
-          submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+        // Buttons
+        prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+        if (currentStep === totalSteps) {
+          nextBtn.classList.add('hidden');
+          submitBtn.classList.remove('hidden');
+        } else {
+          nextBtn.classList.remove('hidden');
+          submitBtn.classList.add('hidden');
+        }
 
-          progress-bar.style.width = (currentStep / totalSteps * 100) + '%';
-          step-counter.innerText = `Step ${currentStep} of ${totalSteps}`;
+        // Progress & Dots
+        progressBar.style.width = (currentStep / totalSteps * 100) + '%';
+        stepCounter.innerText = `Step ${currentStep} of ${totalSteps}`;
+        
+        for (let i = 1; i <= totalSteps; i++) {
+          const dot = document.getElementById(`dot-${i}`);
+          dot.classList.toggle('dot-active', i === currentStep);
+        }
       }
 
       nextBtn.onclick = () => { if (currentStep < totalSteps) { currentStep++; updateUI(); } };
       prevBtn.onclick = () => { if (currentStep > 1) { currentStep--; updateUI(); } };
 
       submitBtn.onclick = () => {
-          const { jsPDF } = window.jspdf;
-          const doc = new jsPDF();
-          const data = Object.fromEntries(new FormData(planForm).entries());
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const data = Object.fromEntries(new FormData(planForm).entries());
 
-          doc.setFontSize(20);
-          doc.text(data.bizName || "Business Plan", 20, 20);
+        // Document Header
+        doc.setFillColor(79, 70, 229); // Indigo
+        doc.rect(0, 0, 210, 40, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(24);
+        doc.text(data.bizName || "Business Plan", 20, 22);
+        doc.setFontSize(12);
+        doc.text((data.bizType || "STRATEGY DOCUMENT").toUpperCase(), 20, 32);
+
+        let y = 55;
+        const section = (title, content) => {
+          if (y > 250) { doc.addPage(); y = 20; }
+          doc.setTextColor(30, 41, 59);
+          doc.setFont(undefined, 'bold');
+          doc.setFontSize(14);
+          doc.text(title, 20, y);
+          y += 7;
+          
+          doc.setFont(undefined, 'normal');
           doc.setFontSize(10);
-          doc.text((data.bizType || "Business").toUpperCase(), 20, 28);
+          doc.setTextColor(71, 85, 105);
+          const txt = doc.splitTextToSize(content || "No data provided.", 170);
+          doc.text(txt, 20, y);
+          y += (txt.length * 5) + 12;
+        };
 
-          let y = 40;
-          const section = (t, c) => {
-              doc.setFontSize(14); doc.text(t, 20, y); y += 6;
-              doc.setFontSize(10);
-              const txt = doc.splitTextToSize(c || "-", 170);
-              doc.text(txt, 20, y);
-              y += txt.length * 5 + 10;
-              if (y > 270) { doc.addPage(); y = 20; }
-          };
+        section("1. Executive Summary", `Mission: ${data.mission}\n\nGoals: ${data.goals}`);
+        section("2. Product Strategy", `Description: ${data.prodDesc}\n\nUSP: ${data.usp}`);
+        section("3. Marketing & Sales", `Pricing: ${data.pricing}\n\nPromotion: ${data.promotion}\n\nRetention: ${data.retention}`);
+        section("4. Operational Plan", data.dailyOps);
+        section("5. Management & Team", data.team);
+        section("6. Financial Projection", `Startup Cost: ${data.costStartup}\nMonthly Burn: ${data.costMonthly}\nTarget Revenue: ${data.revenue}\n\nAnalysis: ${data.profitAnalysis}`);
 
-          section("Mission & Goals", `${data.mission}\n${data.goals}`);
-          section("Product", data.prodDesc);
-          section("Marketing", `${data.pricing}\n${data.promotion}`);
-          section("Operations", data.dailyOps);
-          section("Management", data.team);
-          section("Financials", data.profitAnalysis);
-
-          doc.save(`${data.bizName || "Business"}_Plan.pdf`);
+        doc.save(`${data.bizName || "Business"}_Plan.pdf`);
       };
 
       updateUI();
