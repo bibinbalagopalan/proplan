@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProPlan | Business Strategy Builder</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(
+            1200px circle at top right,
+            #eef2ff,
+            transparent
+          ),
+          linear-gradient(180deg, #f8fafc, #e2e8f0);
+        min-height: 100vh;
+      }
+
+      .step-content {
+        display: none;
+      }
+      .step-content.active {
+        display: block;
+      }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+      }
+
+      .input {
+        width: 100%;
+        padding: 0.8rem 0.9rem;
+        border-radius: 0.6rem;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+      }
+
+      .input:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      }
+
+      label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #475569;
+        margin-top: 1.25rem;
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body class="py-12">
+    <div class="max-w-5xl mx-auto px-6">
+      <!-- HEADER -->
+      <header class="flex justify-between items-center mb-12">
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">
+            Pro<span class="text-indigo-600">Plan</span>
+          </h1>
+          <p class="text-slate-500 mt-1">
+            Enterprise-grade business planning, simplified.
+          </p>
+        </div>
+
+        <div class="text-right">
+          <div
+            id="step-counter"
+            class="inline-flex items-center px-4 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold"
+          >
+            Step 1 of 6
+          </div>
+          <div id="step-dots" class="flex gap-1 mt-2 justify-end"></div>
+        </div>
+      </header>
+
+      <!-- FORM -->
+      <form
+        id="planForm"
+        class="glass rounded-3xl shadow-2xl border border-slate-200 overflow-hidden"
+      >
+        <!-- PROGRESS -->
+        <div class="h-2 bg-slate-100">
+          <div
+            id="progress-bar"
+            class="h-full bg-indigo-600 transition-all duration-500"
+            style="width: 16.6%"
+          ></div>
+        </div>
+
+        <div class="p-10">
+          <!-- STEP 1 -->
+          <div class="step-content active" data-step="1">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">
+              Executive Identity
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label>Business Name</label>
+                <input
+                  name="bizName"
+                  class="input"
+                  placeholder="e.g. Nexus Technologies"
+                />
+              </div>
+              <div>
+                <label>Business Type</label>
+                <select name="bizType" class="input">
+                  <option value="">Select type</option>
+                  <option>Online Store</option>
+                  <option>Service Provider</option>
+                  <option>Technology / SaaS</option>
+                  <option>Manufacturing</option>
+                </select>
+              </div>
+            </div>
+
+            <label>Mission Statement</label>
+            <textarea name="mission" class="input" rows="3"></textarea>
+
+            <label>Strategic Goals</label>
+            <textarea name="goals" class="input" rows="3"></textarea>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step-content" data-step="2">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">
+              Product / Service
+            </h2>
+
+            <label>Description</label>
+            <textarea name="prodDesc" class="input" rows="3"></textarea>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label>How It Works</label>
+                <textarea
+                  name="prodMechanics"
+                  class="input"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div>
+                <label>Customer Need</label>
+                <textarea name="prodNeed" class="input" rows="3"></textarea>
+              </div>
+            </div>
+
+            <label>Unique Value Proposition</label>
+            <input name="usp" class="input" />
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step-content" data-step="3">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">
+              Marketing & Sales
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label>Pricing Strategy</label>
+                <input name="pricing" class="input" />
+              </div>
+              <div>
+                <label>Sales Channels</label>
+                <input name="salesMethod" class="input" />
+              </div>
+            </div>
+
+            <label>Promotion Strategy</label>
+            <textarea name="promotion" class="input" rows="3"></textarea>
+
+            <label>Customer Retention</label>
+            <textarea name="retention" class="input" rows="3"></textarea>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="step-content" data-step="4">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Operations</h2>
+
+            <label>Tools & Infrastructure</label>
+            <textarea name="tools" class="input" rows="3"></textarea>
+
+            <label>Suppliers & Partners</label>
+            <textarea name="suppliers" class="input" rows="3"></textarea>
+
+            <label>Daily Operations</label>
+            <textarea name="dailyOps" class="input" rows="3"></textarea>
+          </div>
+
+          <!-- STEP 5 -->
+          <div class="step-content" data-step="5">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Management</h2>
+
+            <label>Leadership Team</label>
+            <textarea name="team" class="input" rows="3"></textarea>
+
+            <label>Core Competencies</label>
+            <textarea name="skills" class="input" rows="3"></textarea>
+
+            <label>Organizational Structure</label>
+            <input name="orgChart" class="input" />
+          </div>
+
+          <!-- STEP 6 -->
+          <div class="step-content" data-step="6">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Financials</h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div>
+                <label>Startup Cost</label>
+                <input name="costStartup" class="input" />
+              </div>
+              <div>
+                <label>Monthly Expenses</label>
+                <input name="costMonthly" class="input" />
+              </div>
+              <div>
+                <label>Revenue Target</label>
+                <input name="revenue" class="input" />
+              </div>
+            </div>
+
+            <label>Profit & Break-Even Analysis</label>
+            <textarea name="profitAnalysis" class="input" rows="4"></textarea>
+          </div>
+
+          <!-- NAV -->
+          <div class="mt-10 flex justify-between items-center border-t pt-8">
+            <button
+              id="prevBtn"
+              type="button"
+              class="text-slate-500 font-semibold hover:text-slate-800"
+            >
+              ← Back
+            </button>
+
+            <div class="flex gap-4">
+              <button
+                id="nextBtn"
+                type="button"
+                class="px-8 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800"
+              >
+                Next Step
+              </button>
+
+              <button
+                id="submitBtn"
+                type="button"
+                class="hidden px-8 py-3 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700"
+              >
+                Generate PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      let currentStep = 1;
+      const totalSteps = 6;
+
+      const dots = document.getElementById('step-dots');
+      for (let i = 1; i <= totalSteps; i++) {
+          const dot = document.createElement('div');
+          dot.className = "h-1.5 w-5 rounded-full bg-slate-300";
+          dots.appendChild(dot);
+      }
+
+      function updateUI() {
+          document.querySelectorAll('.step-content').forEach(el =>
+              el.classList.toggle('active', +el.dataset.step === currentStep)
+          );
+
+          prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+          nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+          submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+
+          progress-bar.style.width = (currentStep / totalSteps * 100) + '%';
+          step-counter.innerText = `Step ${currentStep} of ${totalSteps}`;
+      }
+
+      nextBtn.onclick = () => { if (currentStep < totalSteps) { currentStep++; updateUI(); } };
+      prevBtn.onclick = () => { if (currentStep > 1) { currentStep--; updateUI(); } };
+
+      submitBtn.onclick = () => {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+          const data = Object.fromEntries(new FormData(planForm).entries());
+
+          doc.setFontSize(20);
+          doc.text(data.bizName || "Business Plan", 20, 20);
+          doc.setFontSize(10);
+          doc.text((data.bizType || "Business").toUpperCase(), 20, 28);
+
+          let y = 40;
+          const section = (t, c) => {
+              doc.setFontSize(14); doc.text(t, 20, y); y += 6;
+              doc.setFontSize(10);
+              const txt = doc.splitTextToSize(c || "-", 170);
+              doc.text(txt, 20, y);
+              y += txt.length * 5 + 10;
+              if (y > 270) { doc.addPage(); y = 20; }
+          };
+
+          section("Mission & Goals", `${data.mission}\n${data.goals}`);
+          section("Product", data.prodDesc);
+          section("Marketing", `${data.pricing}\n${data.promotion}`);
+          section("Operations", data.dailyOps);
+          section("Management", data.team);
+          section("Financials", data.profitAnalysis);
+
+          doc.save(`${data.bizName || "Business"}_Plan.pdf`);
+      };
+
+      updateUI();
+    </script>
+  </body>
+</html>
